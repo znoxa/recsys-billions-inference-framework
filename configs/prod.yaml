@@ -1,0 +1,17 @@
+environment: prod
+gateway:
+  host: 0.0.0.0
+  port: 8080
+  timeout_ms: 50
+  batch_max_size: 128
+  batch_max_delay_ms: 3
+  ab_salt: "recsys-ab-prod"
+services:
+  feature_url: http://feature:8082
+  candidate_url: http://candidate:8081
+  reranker_url: http://reranker:8083
+caching:
+  user_profile_ttl_s: 120
+  candidate_ttl_s: 20
+observability:
+  prometheus_port: 9000

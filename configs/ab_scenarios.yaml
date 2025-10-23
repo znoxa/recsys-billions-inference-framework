@@ -1,0 +1,12 @@
+experiments:
+  - name: "reranker_v2_shadow"
+    match:
+      header: "x-exp"
+      value: "shadow-r2"
+    traffic: "shadow"  # 'control' | 'treatment' | 'shadow'
+  - name: "batching_tuned"
+    hash_on: "user_id"
+    percent: 10
+    treatment:
+      gateway.batch_max_size: 96
+      gateway.batch_max_delay_ms: 4

@@ -1,0 +1,8 @@
+groups:
+- name: recsys-slos
+  rules:
+  - alert: HighLatencyP99
+    expr: histogram_quantile(0.99, sum(rate(latency_seconds_bucket[5m])) by (le,service,route)) > 0.2
+    for: 10m
+    labels: { severity: page }
+    annotations: { summary: "p99 latency high" }

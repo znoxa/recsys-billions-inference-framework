@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reranker
+spec:
+  replicas: 3
+  selector: { matchLabels: { app: reranker } }
+  template:
+    metadata: { labels: { app: reranker } }
+    spec:
+      containers:
+        - name: reranker
+          image: ghcr.io/example/recsys/reranker:latest
+          ports: [{ containerPort: 8083 }]
+---
+apiVersion: v1
+kind: Service
+metadata: { name: reranker }
+spec:
+  selector: { app: reranker }
+  ports: [{ port: 8083, targetPort: 8083 }]
